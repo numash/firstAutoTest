@@ -12,7 +12,9 @@ public class RunTests {
         LoginTests.Login(driver, baseUrl);
         PlayerTests.createUser(driver);
         PlayerTests.verifyPlayerData(driver);
+        PlayerTests.EditPlayer(driver);
+        PlayerTests.verifyPlayerData(driver);
 
-        driver.quit();
+        //driver.quit();
     }
 }
