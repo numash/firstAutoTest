@@ -1,12 +1,11 @@
 /**
  * Created by numash on 25.11.2016.
  */
-public class PockerPlayer {
-    private RandomManager randomManager = new RandomManager();
+//poker player entity
+public class PokerPlayer {
 
     private String username;
     private String email;
-    private String password;
     private String firstname;
     private String lastname;
     private String city;
@@ -14,18 +13,42 @@ public class PockerPlayer {
     private String address;
     private String phone;
 
-    public PockerPlayer() {
+    //constructor
+    public PokerPlayer(
+            String username,
+            String email,
+            String firstname,
+            String lastname,
+            String city,
+            String country,
+            String address,
+            String phone) {
+
+        this.username = username;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.city = city;
+        this.country = country;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    //fills poker player fields with random data
+    public static PokerPlayer CreateRandomPockerPlayer() {
+
+        RandomManager randomManager = new RandomManager();
         String randomString = randomManager.getRandomString(5);
 
-        username = "user68_" + randomString;
-        email = "user68_" + randomString + "@gmail.com";
-        password = "pass_Word68";
-        firstname = "first";
-        lastname = "last";
-        city = "City.";
-        country = "UKRAINE";
-        address = "Address68, " + randomString;
-        phone = "+312345678, 890";
+        return new PokerPlayer(
+                "user68_" + randomString,
+                "user68_" + randomString + "@gmail.com",
+                "first",
+                "last",
+                "City.",
+                "UKRAINE",
+                "Address68, " + randomString,
+                "+312345678, 890");
     }
 
     public void setUsername(String username) {
@@ -34,10 +57,6 @@ public class PockerPlayer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setFirstname(String firstname) {
@@ -72,10 +91,6 @@ public class PockerPlayer {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getFirstname() {
         return firstname;
     }
@@ -105,7 +120,6 @@ public class PockerPlayer {
         return "PockerPlayer{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", city='" + city + '\'' +
@@ -118,13 +132,12 @@ public class PockerPlayer {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PockerPlayer)) return false;
+        if (!(o instanceof PokerPlayer)) return false;
 
-        PockerPlayer that = (PockerPlayer) o;
+        PokerPlayer that = (PokerPlayer) o;
 
         if (!username.equals(that.username)) return false;
         if (!email.equals(that.email)) return false;
-        if (!password.equals(that.password)) return false;
         if (!firstname.equals(that.firstname)) return false;
         if (!lastname.equals(that.lastname)) return false;
         if (!city.equals(that.city)) return false;
@@ -136,7 +149,6 @@ public class PockerPlayer {
     @Override
     public int hashCode() {
         int result = email.hashCode();
-        result = 31 * result + password.hashCode();
         result = 31 * result + firstname.hashCode();
         result = 31 * result + lastname.hashCode();
         result = 31 * result + city.hashCode();

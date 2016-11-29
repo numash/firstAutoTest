@@ -7,29 +7,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by numash on 23.11.2016.
  */
-public class LoginTests {
+//implements login methods
+public class LoginTests extends BaseTests{
 
-    /*public static void assertText(String actualValue, String expectedValue) {
-        if(actualValue.equals(expectedValue)) {
-            System.out.println("Passed.");
-        } else {
-            System.err.println("Failed. Expected value is "
-                + expectedValue + ", but Actual value is " + actualValue);
-        }
-    }*/
-
-    public static void assertText(String actualValue, String expectedValue) throws Exception {
-        if(actualValue.equals(expectedValue)) {
-            System.out.println("Passed.");
-        } else {
-            System.err.println("Failed. Expected value is "
-                    + expectedValue + ", but Actual value is " + actualValue);
-            throw new Exception();
-        }
+    //constructor based on parent class BaseTests
+    public LoginTests(WebDriver driver, String baseUrl) {
+        super(driver, baseUrl);
     }
 
-    public static void Login(WebDriver driver, String url){
-        driver.get(url + "auth/login");
+    //runs login method
+    public void run() throws TestFailedException{
+        login();
+    }
+
+    //logs
+    private void login() throws TestFailedException{
+        driver.get(baseUrl + "auth/login");
+        //compares titles
+        assertResult("LoginTests", "login", "Login", driver.getTitle());
 
         String username  = "admin";
         String password = "123";
@@ -49,10 +44,7 @@ public class LoginTests {
         String actualTitle = driver.getTitle();
         String expectedTitle = "Players";
 
-        try {
-            assertText(actualTitle, expectedTitle);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //compares titles
+        assertResult("LoginTests", "login", expectedTitle, actualTitle);
     }
 }
